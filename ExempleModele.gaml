@@ -90,17 +90,17 @@ species people skills: [moving] control: simple_bdi{
 	}
 	
 	perceive target:people in: other_distance when: not escape_mode {
-		unconscious_contagion emotion:new_emotion("fearConfirmed",new_predicate("catastrophe"))
+		unconscious_contagion emotion:new_emotion("fear_confirmed",new_predicate("catastrophe"))
 		 when:fearful;
-		unconscious_contagion emotion:new_emotion("fearConfirmed",new_predicate("catastrophe"))
+		unconscious_contagion emotion:new_emotion("fear_confirmed",new_predicate("catastrophe"))
 		 when: has_emotion(new_emotion("fear",new_predicate("catastrophe")));
 		unconscious_contagion emotion:new_emotion("fear") charisma: charisma receptivity:receptivity;
-		conscious_contagion emotion_detected:new_emotion("fearConfirmed",new_predicate("catastrophe"))
+		conscious_contagion emotion_detected:new_emotion("fear_confirmed",new_predicate("catastrophe"))
 		 emotion_created:new_emotion("fear",new_predicate("catastrophe")) charisma:charisma receptivity: receptivity;
 	}
 	
 	rule emotion:new_emotion("fear" ,new_predicate("catastrophe")) new_desire:in_shelter remove_intention:at_target when: fearful ;
-	rule emotion:new_emotion("fearConfirmed",new_predicate("catastrophe")) remove_intention: at_target new_desire:in_shelter;
+	rule emotion:new_emotion("fear_confirmed",new_predicate("catastrophe")) remove_intention: at_target new_desire:in_shelter;
 	rule belief:new_predicate("catastrophe") remove_intention:at_target new_desire:in_shelter;
 	
 	plan normal_move intention: at_target  {
@@ -115,7 +115,7 @@ species people skills: [moving] control: simple_bdi{
 		}
 	}
 	
-	plan evacuationFast intention: in_shelter emotion: new_emotion("fearConfirmed",new_predicate("catastrophe")) priority:2 {
+	plan evacuationFast intention: in_shelter emotion: new_emotion("fear_confirmed",new_predicate("catastrophe")) priority:2 {
 		color <- #yellow;
 		speed <- 60 #km/#h;
 		if (target = nil or noTarget) {
